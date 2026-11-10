@@ -56,15 +56,16 @@
               <h3 class="project-name">
                 <a href="https://github.com/yancsalmeida/IndustrialTelemetry.Engine" target="_blank" rel="noopener noreferrer">IndustrialTelemetry.Engine</a>
               </h3>
-              <span class="project-stack">C# 12 &middot; .NET 8 &middot; PostgreSQL 16 &middot; Docker</span>
+              <span class="project-stack">C# 12 &middot; .NET 8 &middot; EF Core &middot; Dapper &middot; PostgreSQL 16</span>
             </div>
             <div class="project-role">Asynchronous telemetry ingestion pipeline and batch execution state machine</div>
             <p class="project-desc">
               Decouples high-frequency HTTP sensor ingestion from database writes using bounded in-memory channels
               (<code>System.Threading.Channels</code>) and a hosted background worker with micro-batch flushing.
               Persists time-series records via PostgreSQL Binary <code>COPY</code> (<code>NpgsqlBinaryImporter</code>)
-              with composite indexing on <code>(batch_id, timestamp_utc)</code>, enforcing strict batch lifecycle transitions
-              (<code>Scheduled</code> &rarr; <code>InProgress</code> &rarr; <code>Completed</code>/<code>Aborted</code>) and threshold alarm rules.
+              on composite indexes <code>(batch_id, timestamp_utc)</code>, executes server-side SQL statistical aggregations
+              via <code>Dapper</code>, and enforces strict batch lifecycle transitions
+              (<code>Scheduled</code> &rarr; <code>InProgress</code> &rarr; <code>Completed</code>/<code>Aborted</code>).
             </p>
           </article>
 
